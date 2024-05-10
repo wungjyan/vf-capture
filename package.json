@@ -1,6 +1,6 @@
 {
   "name": "vf-capture",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "原生 JavaScript 实现的视频帧图片捕获插件",
   "type": "module",
   "files": [
