@@ -10,14 +10,20 @@
     "LICENSE"
   ],
   "main": "./dist/vf-capture.umd.js",
-  "module": "./dist/vf-capture.js",
+  "module": "./dist/vf-capture.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vf-capture.js",
+      "import": "./dist/vf-capture.es.js",
       "require": "./dist/vf-capture.umd.js"
     }
   },
   "types": "./dist/index.d.ts",
+  "keywords": [
+    "videoFrameCapture",
+    "videoCover",
+    "video",
+    "canvas"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
