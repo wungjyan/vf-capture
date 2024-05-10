@@ -13,16 +13,19 @@ function captureFrame(
   options: Options
 ): Promise<string | { blob: Blob; url: string }> {
   return new Promise((resolve, reject) => {
-    const videoEle = document.createElement("video");
-    videoEle.currentTime = options.time || 0;
-    videoEle.muted = true;
-    videoEle.autoplay = true;
-    videoEle.src = URL.createObjectURL(videoFile);
-    videoEle.oncanplay = () => {
-      const canvasEle = document.createElement("canvas");
-      canvasEle.width = options.width || (options.width = 300);
-      canvasEle.height = options.height || options.width;
-      try {
+    if (!isFile(videoFile)) {
+      reject("The first argument is not a file type");
+    }
+    try {
+      const videoEle = document.createElement("video");
+      videoEle.currentTime = options.time || 0;
+      videoEle.muted = true;
+      videoEle.autoplay = true;
+      videoEle.src = URL.createObjectURL(videoFile);
+      videoEle.oncanplay = () => {
+        const canvasEle = document.createElement("canvas");
+        canvasEle.width = options.width || (options.width = 300);
+        canvasEle.height = options.height || options.width;
         const ctx = canvasEle.getContext("2d");
         ctx?.drawImage(videoEle, 0, 0, canvasEle.width, canvasEle.height);
         if (options.base64) {
@@ -43,11 +46,15 @@ function captureFrame(
             reject("canvas failed to convert blob");
           }
         });
-      } catch (err) {
-        reject(err);
-      }
-    };
+      };
+    } catch (err) {
+      reject(err);
+    }
   });
+}
+
+function isFile(val: any): boolean {
+  return val instanceof File;
 }
 
 export default captureFrame;

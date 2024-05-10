@@ -1,31 +1,35 @@
-function i(u, e) {
-  return new Promise((n, d) => {
-    const a = document.createElement("video");
-    a.currentTime = e.time || 0, a.muted = !0, a.autoplay = !0, a.src = URL.createObjectURL(u), a.oncanplay = () => {
-      const t = document.createElement("canvas");
-      t.width = e.width || (e.width = 300), t.height = e.height || e.width;
-      try {
-        const c = t.getContext("2d");
-        if (c == null || c.drawImage(a, 0, 0, t.width, t.height), e.base64) {
-          const r = t.toDataURL(e.base64.type || "image/png", e.base64.quality || 1);
-          n(r);
+function l(r, e) {
+  return new Promise((u, n) => {
+    h(r) || n("The first argument is not a file type");
+    try {
+      const t = document.createElement("video");
+      t.currentTime = e.time || 0, t.muted = !0, t.autoplay = !0, t.src = URL.createObjectURL(r), t.oncanplay = () => {
+        const a = document.createElement("canvas");
+        a.width = e.width || (e.width = 300), a.height = e.height || e.width;
+        const i = a.getContext("2d");
+        if (i == null || i.drawImage(t, 0, 0, a.width, a.height), e.base64) {
+          const c = a.toDataURL(e.base64.type || "image/png", e.base64.quality || 1);
+          u(c);
         }
-        t.toBlob((r) => {
-          if (r) {
-            const h = URL.createObjectURL(r);
-            n({
-              blob: r,
-              url: h
+        a.toBlob((c) => {
+          if (c) {
+            const d = URL.createObjectURL(c);
+            u({
+              blob: c,
+              url: d
             });
           } else
-            d("canvas failed to convert blob");
+            n("canvas failed to convert blob");
         });
-      } catch (c) {
-        d(c);
-      }
-    };
+      };
+    } catch (t) {
+      n(t);
+    }
   });
 }
+function h(r) {
+  return r instanceof File;
+}
 export {
-  i as default
+  l as default
 };
