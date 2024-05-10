@@ -1,4 +1,4 @@
-import { captureFrame } from "../src/index.ts";
+import captureFrame from "../src/index.ts";
 
 const inp = document.querySelector("input[type=file]");
 

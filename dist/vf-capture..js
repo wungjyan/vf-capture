@@ -1,7 +1,7 @@
-function u(h, e) {
+function i(u, e) {
   return new Promise((n, d) => {
     const a = document.createElement("video");
-    a.currentTime = e.time || 0, a.muted = !0, a.autoplay = !0, a.src = URL.createObjectURL(h), a.oncanplay = () => {
+    a.currentTime = e.time || 0, a.muted = !0, a.autoplay = !0, a.src = URL.createObjectURL(u), a.oncanplay = () => {
       const t = document.createElement("canvas");
       t.width = e.width || (e.width = 300), t.height = e.height || e.width;
       try {
@@ -12,10 +12,10 @@ function u(h, e) {
         }
         t.toBlob((r) => {
           if (r) {
-            const i = URL.createObjectURL(r);
+            const h = URL.createObjectURL(r);
             n({
               blob: r,
-              url: i
+              url: h
             });
           } else
             d("canvas failed to convert blob");
@@ -27,5 +27,5 @@ function u(h, e) {
   });
 }
 export {
-  u as captureFrame
+  i as default
 };

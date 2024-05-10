@@ -8,7 +8,7 @@ export interface Options {
   };
 }
 
-export function captureFrame(
+function captureFrame(
   videoFile: File,
   options: Options
 ): Promise<string | { blob: Blob; url: string }> {
@@ -49,3 +49,5 @@ export function captureFrame(
     };
   });
 }
+
+export default captureFrame;
