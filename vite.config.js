@@ -7,7 +7,7 @@ export default defineConfig({
     lib: {
       entry: "src/index.ts",
       name: "VFCapture",
-      fileName: (format) => `vf-capture.${format === "es" ? "" : format}.js`
+      fileName: (format) => `vf-capture.${format}.js`
     }
   }
 });
